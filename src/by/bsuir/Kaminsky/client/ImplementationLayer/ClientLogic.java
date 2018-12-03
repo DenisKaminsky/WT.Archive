@@ -1,5 +1,6 @@
 package by.bsuir.Kaminsky.client.ImplementationLayer;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -12,47 +13,42 @@ public class ClientLogic {
 	private static ObjectOutputStream out;
 	private static ObjectInputStream in;
 	
-	public static void sendMessage() {
-		out.reset();
-        out.writeObject(\\\);
-        out.flush();
-	}
-	
-	public static void recieveMessage() {
-		XmlCollection result = (XmlCollection) in.readObject();
-	}
-	
-	public static void logIn(){	
-		User newUser;
-		Object[] answer = Controller.authorizeRequest();
-		
-		if (answer != null){		
-			if ( !(boolean)answer[0] ){			
-				newUser = new User((String)answer[1], MD5.getHash((String)answer[2]), false);
-				if ( ! DaoFactory.getUserDao().save(newUser) ){				
-					Controller.notifyUserRequest("User with this login already exist!");
-					return;
-				}	
-				else{				
-					Controller.notifyUserRequest("User "+(String)answer[1]+" was successfully register");
-				}
-			}
-			setAuthorizeUser((String)answer[1],(String)answer[2]);
+	/** Send message */
+	public static void sendMessage(Object message) {
+        try {
+        	out.reset();
+            out.writeObject(message);
+            out.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	
-	/** Authorize */
-	private static void setAuthorizeUser(String login,String password) {
-		String name;
-		user = DaoFactory.getUserDao().getAuthorizeUser(login, MD5.getHash(password));
+	/** Receive message */
+	private static ArrayList<Object> receiveMessage() {
+		ArrayList<Object> result = null;
+		try {
+			result = (ArrayList<Object>)in.readObject();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static void logIn(ObjectInputStream inpStream,ObjectOutputStream outStream){	
+		Object[] answer = Controller.authorizeRequest();
 		
-		if (user == null){
-            Controller.notifyUserRequest("Wrong login or password");
-        } else{   
-        	name = (user.getIsAdministrator())?"Administrator ":"User ";
-        	Controller.notifyUserRequest(name+user.getLogin()+" log in");
-            chooseAction();
-        }	
+		in = inpStream;
+		out = outStream;		
+		if (answer != null){
+			ArrayList<Object> message = new ArrayList<Object>();
+			message.add(0);
+			message.add(answer);
+			sendMessage((Object)message);
+			receiveMessage();
+		}
 	}
 	
 	/** Choose action */
