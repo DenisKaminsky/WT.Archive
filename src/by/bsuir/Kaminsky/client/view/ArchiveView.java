@@ -2,12 +2,25 @@ package by.bsuir.Kaminsky.client.view;
 
 import by.bsuir.Kaminsky.tools.ConsoleReader.ConsoleReader;
 
+/**
+ * Read data from user
+ * @author DenisKaminsky
+ * @version 1.1
+ */
 public class ArchiveView {
 	
+	/**
+	 * Show message to User
+	 * @param message - Message
+	 */
 	public static void showMessage(String message) {
 		System.out.println(message);
 	}
 	
+	/**
+	 * Input data about user
+	 * @return list of data, input by user
+	 */
 	public static Object[] getPersonalData(){
 		boolean answer;
 		String login,password,attribute="";
@@ -27,6 +40,10 @@ public class ArchiveView {
 		return new Object[] {answer,login,password};
 	}
 	
+	/**
+	 * Input data about book
+	 * @return list of data, input by user
+	 */
 	public static Object[] getBookData() {
 		Boolean answer;
 		String title,author;
@@ -40,16 +57,26 @@ public class ArchiveView {
 		return new Object[] {author,title,answer};		
 	}
 	
+	/**
+	 * Input command
+	 * @return command, selected by user
+	 */
 	public static String getAction() {		
 		System.out.print("\nInput command(/help to see more info): ");
 		return ConsoleReader.getString();
 	}
 	
+	/**
+	 * Input parameter for user
+	 * @param parameterName - Name of parameter
+	 * @return parameter, input by user
+	 */
 	public static String getParameter(String parameterName) {
 		System.out.print("Input "+parameterName+": ");
 		return ConsoleReader.getString();
 	}
 	
+	/** Print all available commands */
 	public static void printAvailableActions() {		
         System.out.println("/exit - Exit");
         System.out.println("/logout - Log out");

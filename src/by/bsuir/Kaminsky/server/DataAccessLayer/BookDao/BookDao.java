@@ -4,15 +4,27 @@ import java.io.*;
 import java.util.ArrayList;
 import by.bsuir.Kaminsky.models.Book;
 
+/**
+ * Work with books database
+ * @author DenisKaminsky
+ * @version 1.1
+ */
 public class BookDao implements IBookDao{
 	
+	/** Path to books database */
 	private String fileName;
 	
+	/** Constructor set the path to books database */	
 	public BookDao()
 	{
 		fileName = getDatabasePath();
 	}
 		
+	/**
+	 * Delete book from books database
+	 * @param book - Book entity
+	 * @return true if book was successfully deleted from books database,else return false
+	 */
 	public boolean delete(Book book) {
 		int counter = 0;
 		boolean flag = false;
@@ -37,6 +49,11 @@ public class BookDao implements IBookDao{
 		return flag;
 	}
 	
+	/**
+	 * Save book to books database
+	 * @param book - Book entity
+	 * @return true if book was successfully added to books database,else return false
+	 */
 	public boolean save(Book book) {
 		boolean flag = false;
 		File f = new File(fileName);	
@@ -71,6 +88,12 @@ public class BookDao implements IBookDao{
 		return flag;
 	}
 	
+	/**
+	 * Replace book from books database by new book
+	 * @param bookOld - Old book entity
+	 * @param bookNew - New book entity
+	 * @return true if book was successfully replace by new book,else return false
+	 */
 	public boolean replace(Book bookOld,Book bookNew) {
 		int counter = 0;
 		boolean flag = false;
@@ -96,6 +119,10 @@ public class BookDao implements IBookDao{
 		return flag;
 	}
 	
+	/**
+	 * Give all books from books database
+	 * @return list of books if they was successfully load from database, else return empty list
+	 */
 	public ArrayList<Book> getBooks(){
 		File f = new File(fileName);
 		ArrayList<Book> books = new ArrayList<Book>();
@@ -112,6 +139,11 @@ public class BookDao implements IBookDao{
 		return books;
 	}
 	
+	/**
+	 * Give all books with specified title from books database
+	 * @param title - Book title
+	 * @return list of books if they was successfully load from database, else return empty list
+	 */
 	public ArrayList<Book> getBooksByTitle(String title){
 		ArrayList<Book> books = getBooks();
 		ArrayList<Book> result= new ArrayList<Book>();
@@ -123,6 +155,11 @@ public class BookDao implements IBookDao{
 		return result;
 	}
 	
+	/**
+	 * Give all books by specified author from books database
+	 * @param author - Book author
+	 * @return list of books if they was successfully load from database, else return empty list
+	 */
 	public ArrayList<Book> getBooksByAuthor(String author){
 		ArrayList<Book> books = getBooks();
 		ArrayList<Book> result= new ArrayList<Book>();
@@ -133,7 +170,11 @@ public class BookDao implements IBookDao{
 		}
 		return result;
 	}
-		
+	
+	/**
+	 * Give all paper books from books database
+	 * @return list of books if they was successfully load from database, else return empty list
+	 */
 	public ArrayList<Book> getPaperBooks(){
 		ArrayList<Book> books = getBooks();
 		ArrayList<Book> result= new ArrayList<Book>();
@@ -144,7 +185,11 @@ public class BookDao implements IBookDao{
 		}
 		return result;
 	}
-		
+	
+	/**
+	 * Give all electronic books from books database
+	 * @return list of books if they was successfully load from database, else return empty list
+	 */
 	public ArrayList<Book> getElectonicBooks(){
 		ArrayList<Book> books = getBooks();
 		ArrayList<Book> result= new ArrayList<Book>();
@@ -156,6 +201,11 @@ public class BookDao implements IBookDao{
 		return result;
 	}
 	
+	 /**
+     * Serialize list of book entities to book database
+     * @param books - List of book entities
+     * @param fileName - path to books database
+     */
 	private void SerializeBooks(ArrayList<Book> books,String fileName) throws IOException {
 		FileOutputStream fileStream = new FileOutputStream(fileName);
 	    ObjectOutputStream objectStream = new ObjectOutputStream(fileStream);
@@ -165,6 +215,11 @@ public class BookDao implements IBookDao{
 	    fileStream.close();
 	}
 	
+	/**
+     * Deserialize list of book entities from book database
+     * @param fileName - path to book database
+     * @return list of book entities if they was successfully loaded from file, else return empty list
+     */
 	@SuppressWarnings("unchecked")
 	private ArrayList<Book> DeserializeBooks(String fileName) throws IOException, ClassNotFoundException{
 		ArrayList<Book> result;
@@ -184,6 +239,10 @@ public class BookDao implements IBookDao{
 	    return result;
 	}
 
+	/**
+     * Calculate path to books database
+     * @return path to books database
+     */
 	private String getDatabasePath(){
 		return new File("").getAbsolutePath()+"src\\by\\bsuir\\Kaminsky\\server\\database\\BooksDatabase.xml";
 	}	

@@ -5,8 +5,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import by.bsuir.Kaminsky.client.view.ArchiveView;
 
+/**
+ * The layer between presentation and implementation,make requests to user and validate data from user
+ * @author DenisKaminsky
+ * @version 1.1
+ */
 public class Controller {
 	
+	/** 
+	 * Make authorization request to user and validate answer
+	 * @return list of parameters, input by user
+	 */
 	public static Object[] authorizeRequest(){
 		Object[] result  = ArchiveView.getPersonalData();
 		
@@ -20,6 +29,10 @@ public class Controller {
 		}
 	}
 	
+	/** 
+	 * Make request for book parameters to user and validate answer
+	 * @return list of parameters, input by user
+	 */
 	public static Object[] getBookRequest() {
 		Object[] result = ArchiveView.getBookData();
 		
@@ -33,6 +46,10 @@ public class Controller {
 		}
 	}	
 	
+	/** 
+	 * Make book replace request to user and validate answer
+	 * @return list of parameters, input by user
+	 */
 	public static Object[] replaceBookRequest() {
 		Object[] resultOld,resultNew;
 		
@@ -57,6 +74,11 @@ public class Controller {
 		}		
 	}
 	
+	/** 
+	 * Make request for specified parameter input to user and validate answer
+	 * @param parameterName - Name of input parameter
+	 * @return value of parameter, input by user
+	 */
 	public static String getParameterRequest(String parameterName) {
 		String result = ArchiveView.getParameter(parameterName);
 		
@@ -67,6 +89,11 @@ public class Controller {
 		return null;
 	}
 	
+	/** 
+	 * Make request for choose action to user and validate answer
+	 * @param isAdmin - Define type of user
+	 * @return user selection
+	 */
 	public static int chooseActionRequest(boolean isAdmin){
 		int result  = -1;
 		String action = ArchiveView.getAction().toLowerCase().trim();
@@ -123,10 +150,18 @@ public class Controller {
 		return result;
 	}
 	
+	/** 
+	 * Notify users by sending message
+	 * @param message - Message
+	 */
 	public static void notifyUserRequest(String message) {
 		ArchiveView.showMessage("<"+message+">");
 	}
 	
+	/** 
+	 * Make request for print list to user
+	 * @param list - List
+	 */
 	public static void printListRequest(ArrayList<Object> list) {
 		int counter = 1;
 		
@@ -138,6 +173,11 @@ public class Controller {
 			notifyUserRequest("Books not found");
 	}
 	
+	/** 
+	 * Validate email address
+	 * @param  email - Email address
+	 * @return true if address is correct, else return false
+	 */
 	private static boolean isValidEmailAddress(String email) {
 		Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(email);
@@ -145,6 +185,11 @@ public class Controller {
 		return matcher.find();		
     }
 	
+	/** 
+	 * Validate password
+	 * @param  password - Password
+	 * @return true if password is correct, else return false
+	 */
 	private static boolean isValidPassword(String password) {
 		if (password.length() < 5)
 			return false;

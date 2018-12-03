@@ -2,46 +2,88 @@ package by.bsuir.Kaminsky.models;
 
 import java.io.Serializable;
 
+/**
+ * User entity
+ * @author DenisKaminsky
+ * @version 1.1
+ */
 public class User implements Serializable {
 	
+	/** The unique version ID of the serialized class */
 	private static final long serialVersionUID = 1L;
 	
+	/** User's login */
 	private String login;
 	
+	/** User's password */
 	private String password;
 	
+	/** User type */
 	private boolean isAdministrator;
 	
+	/** Constructor set users's login,password and type 
+	 * @param login - User login
+	 * @param password - User password
+	 * @param isAdministrator - User type
+	 * */
 	public User(String login,String password,boolean isAdministrator){
 		this.login = login;
 		this.password = password;
 		this.isAdministrator = isAdministrator;
 	}
 	
+	/**
+	 * Get user's login
+	 * @return return user's login
+	 */
 	public String getLogin(){
 		return login;
 	}
 	
+	/**
+	 * Set user's login
+	 * @param value - User's login
+	 */
 	public void setLogin(String value) {
 		login = value;
 	}
 	
+	/**
+	 * Get user's password
+	 * @return return user's password
+	 */
 	public String getPassword(){
 		return password;
 	}
 	
+	/**
+	 * Set user's password
+	 * @param value - User's password
+	 */
 	public void setPassword(String value) {
 		password = value;
 	}
 	
+	/**
+	 * Get user type
+	 * @return return user's login
+	 */
 	public boolean getIsAdministrator(){
 		return isAdministrator;
 	}
 	
+	/**
+	 * Set user's type
+	 * @param value - User's type
+	 */
 	public void setIsAdministrator(Boolean value) {
 		isAdministrator = value;
 	}
 	
+	/**
+	 * Override equals method to compare users
+	 * @param obj - User entity
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		User user;
@@ -55,6 +97,10 @@ public class User implements Serializable {
             ( login != null && login.equals(user.getLogin()) ) );
 	}
 	
+	/**
+	 * Override toString method to print users
+	 * @return string representation of object
+	 */
 	@Override
 	public String toString() {
 		String type = (isAdministrator)?"Administrator":"User";
