@@ -4,7 +4,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import by.bsuir.Kaminsky.client.controller.Controller;
-import by.bsuir.Kaminsky.client.view.XmlCollection;
 import by.bsuir.Kaminsky.models.User;
 
 public class ClientLogic {
