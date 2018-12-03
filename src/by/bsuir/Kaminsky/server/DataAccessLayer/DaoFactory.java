@@ -1,7 +1,7 @@
 package by.bsuir.Kaminsky.server.DataAccessLayer;
 
-import by.bsuir.Kaminsky.DataAccessLayer.BookDao.BookDao;
-import by.bsuir.Kaminsky.DataAccessLayer.UserDao.UserDao;
+import by.bsuir.Kaminsky.server.DataAccessLayer.BookDao.BookDao;
+import by.bsuir.Kaminsky.server.DataAccessLayer.UserDao.UserDao;
 
 public class DaoFactory {
 	
