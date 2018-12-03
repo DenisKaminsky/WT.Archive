@@ -25,6 +25,7 @@ public class ClientLogic {
 	}
 	
 	/** Receive message */
+	@SuppressWarnings("unchecked")
 	private static ArrayList<Object> receiveMessage() {
 		ArrayList<Object> result = null;
 		try {
@@ -39,15 +40,22 @@ public class ClientLogic {
 	
 	public static void logIn(ObjectInputStream inpStream,ObjectOutputStream outStream){	
 		Object[] answer = Controller.authorizeRequest();
+		ArrayList<Object> message,result;
 		
 		in = inpStream;
 		out = outStream;		
 		if (answer != null){
-			ArrayList<Object> message = new ArrayList<Object>();
+			message = new ArrayList<Object>();
 			message.add(0);
 			message.add(answer);
 			sendMessage((Object)message);
-			receiveMessage();
+			result = receiveMessage();
+			if ((boolean)result.get(1)) {
+				user = (User)result.get(2);
+				Controller.notifyUserRequest("User "+user.getLogin()+" was successfully register");
+				chooseAction();
+			}else
+				Controller.notifyUserRequest((String)result.get(3));				
 		}
 	}
 	

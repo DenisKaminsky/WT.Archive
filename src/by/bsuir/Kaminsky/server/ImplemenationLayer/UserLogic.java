@@ -29,6 +29,7 @@ public class UserLogic {
 	}
 	
 	/** Receive message */
+	@SuppressWarnings("unchecked")
 	private static ArrayList<Object> receiveMessage() {
 		ArrayList<Object> result = null;
 		try {
