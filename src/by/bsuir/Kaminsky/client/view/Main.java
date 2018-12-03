@@ -1,5 +1,6 @@
 package by.bsuir.Kaminsky.client.view;
 
+import by.bsuir.Kaminsky.client.controller.Controller;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -18,18 +19,18 @@ public class Main {
 
         System.out.println(addr);
         try (Socket socket = new Socket(addr, PORT)) {
-            System.out.println("SOCKET : " + socket);
+            System.out.println("<create> SOCKET : " + socket);
             out = new ObjectOutputStream (socket.getOutputStream());
             in = new ObjectInputStream (socket.getInputStream());
 
             while (true){
-                //ввод команды
+                //input command
                 String command = controller.waitCommand();
-                //отперавка команды на сервер
+                //send command to server
                 out.reset();
                 out.writeObject(controller.performCommand(command));
                 out.flush();
-                //вывод результата(ответ сервера)
+                //get answer from server
                 XmlCollection result = (XmlCollection) in.readObject();
                 System.out.println(controller.getAnswer(result));
             }
