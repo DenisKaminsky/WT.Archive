@@ -1,8 +1,6 @@
 package by.bsuir.Kaminsky.server.ImplemenationLayer;
 
 import java.util.ArrayList;
-
-import by.bsuir.Kaminsky.Controller.Controller;
 import by.bsuir.Kaminsky.server.DataAccessLayer.DaoFactory;
 import by.bsuir.Kaminsky.models.Book;
 
@@ -13,25 +11,23 @@ import by.bsuir.Kaminsky.models.Book;
  */
 public class BookLogic {
 		
-	/** Get book by author */
-	public static void findBooksByAuthor(){
+	/** Get books by author */
+	public static void findBooksByAuthor(String author){
 		 ArrayList<Object> books;
-		 String answer = Controller.getParameterRequest("author");
 		 
-		 if (answer != null) {			 
-			 books = new ArrayList<Object>(DaoFactory.getBookDao().getBooksByAuthor(answer));				
-			 Controller.printListRequest(books);	
+		 if (author != null) {			 
+			 books = new ArrayList<Object>(DaoFactory.getBookDao().getBooksByAuthor(author));				
+			 //Controller.printListRequest(books);	
 		 }			 
     }
 	
-	/** Get book by title */
-	public static void findBooksByTitle(){
+	/** Get books by title */
+	public static void findBooksByTitle(String title){
 		 ArrayList<Object> books;
-		 String answer = Controller.getParameterRequest("title");
 		 
-		 if (answer != null) {			 
-			 books = new ArrayList<Object>(DaoFactory.getBookDao().getBooksByTitle(answer));				
-			 Controller.printListRequest(books);	
+		 if (title != null) {			 
+			 books = new ArrayList<Object>(DaoFactory.getBookDao().getBooksByTitle(title));				
+			 //Controller.printListRequest(books);	
 		 }			 
     }
 	
@@ -39,21 +35,21 @@ public class BookLogic {
 	public static void findPaperBooks(){
 		ArrayList<Object> books = new ArrayList<Object>(DaoFactory.getBookDao().getPaperBooks());
 		
-		Controller.printListRequest(books);	
+		//Controller.printListRequest(books);	
     }
 	
 	/** Get electronic books */
 	public static void findElectonicBooks(){
 		ArrayList<Object> books = new ArrayList<Object>(DaoFactory.getBookDao().getElectonicBooks());
 		
-		Controller.printListRequest(books);	
+		//Controller.printListRequest(books);	
     }
 	
 	/** Get all books */
 	public static void getBooks(){	
 		ArrayList<Object> books = new ArrayList<Object>(DaoFactory.getBookDao().getBooks());
 		
-		Controller.printListRequest(books);		
+		//Controller.printListRequest(books);		
 	}
 	
 	/** Add book */
