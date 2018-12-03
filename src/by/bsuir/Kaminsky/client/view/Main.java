@@ -1,5 +1,6 @@
 package by.bsuir.Kaminsky.client.view;
 
+import by.bsuir.Kaminsky.client.ImplementationLayer.ClientLogic;
 import by.bsuir.Kaminsky.client.controller.Controller;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -24,6 +25,7 @@ public class Main {
             in = new ObjectInputStream (socket.getInputStream());
 
             while (true){
+            	ClientLogic.logIn();
                 //input command
                 String command = controller.waitCommand();
                 //send command to server
