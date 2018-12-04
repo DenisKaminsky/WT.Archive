@@ -1,5 +1,28 @@
 package by.bsuir.Kaminsky.server.view;
 
-public class ServerMultiThread {
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import by.bsuir.Kaminsky.server.ImplemenationLayer.UserLogic;
+
+public class ServerMultiThread extends Thread {
+
+    private Socket socket;
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
+    
+    ServerMultiThread(Socket s) throws IOException {
+        socket = s;
+        in = new ObjectInputStream (socket.getInputStream());
+        out = new ObjectOutputStream (socket.getOutputStream());
+
+        start(); // call run()
+    }
+
+    public void run() {        
+    	UserLogic.chooseAction(in,out);
+        System.out.println("<close> Server closing");  
+    }
 
 }

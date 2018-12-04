@@ -50,12 +50,18 @@ public class ClientLogic {
 			message.add(answer);
 			sendMessage((Object)message);
 			result = receiveMessage();
-			if ((boolean)result.get(1)) {
+			if ((boolean)result.get(1) && !(boolean)answer[0]) {
 				user = (User)result.get(2);
 				Controller.notifyUserRequest("User "+user.getLogin()+" was successfully register");
 				chooseAction();
-			}else
-				Controller.notifyUserRequest((String)result.get(3));				
+			}else if ((boolean)result.get(1) && (boolean)answer[0]) {
+				user = (User)result.get(2);
+				String name = (user.getIsAdministrator())?"Administrator ":"User ";
+				Controller.notifyUserRequest(name+user.getLogin()+" log in");
+				chooseAction();
+			}
+			else
+				Controller.notifyUserRequest((String)result.get(2));				
 		}
 	}
 	

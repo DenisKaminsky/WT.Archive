@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;
 
 public class Main {
-	private static final int PORT = 8080;
+	private static final int PORT = 9090;
 	
 	public static void main(String[] args) throws IOException {
         try (ServerSocket s = new ServerSocket(PORT)) {
@@ -13,8 +13,9 @@ public class Main {
             	//is blocked until a new connection is established
                 Socket socket = s.accept();
                 try {
-                    new ServerOneWorker(socket);
-                } catch (IOException e) {
+                	System.out.println("Connect with "+socket.getLocalPort()+socket.getInetAddress());
+                    new ServerMultiThread(socket);
+                }catch (IOException e) {
                     socket.close();
                 }
             }

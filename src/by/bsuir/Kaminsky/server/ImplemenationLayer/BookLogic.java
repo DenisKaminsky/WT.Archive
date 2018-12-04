@@ -18,7 +18,8 @@ public class BookLogic {
 		 		 		
 		message.add(action);
 		message.add(true);
-		message.add(books);		
+		message.add(books);	
+		System.out.println("<action> Get books by author '"+author+"'");
 		return message;	
     }
 	
@@ -29,7 +30,8 @@ public class BookLogic {
 		 			 
 		message.add(action);
 		message.add(true);
-		message.add(books);		
+		message.add(books);
+		System.out.println("<action> Get books by title '"+title+"'");
 		return message;		 			 
     }
 	
@@ -41,6 +43,7 @@ public class BookLogic {
 		message.add(action);
 		message.add(true);
 		message.add(books);
+		System.out.println("<action> Get paper books");
 		return message;	
     }
 	
@@ -52,6 +55,7 @@ public class BookLogic {
 		message.add(action);
 		message.add(true);
 		message.add(books);
+		System.out.println("<action> Get electronic books");
 		return message;
     }
 	
@@ -63,6 +67,7 @@ public class BookLogic {
 		message.add(action);
 		message.add(true);
 		message.add(books);
+		System.out.println("<action> Get all books");
 		return message;
 	}
 	

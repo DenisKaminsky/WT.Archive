@@ -170,7 +170,7 @@ public class UserDao implements IUserDao {
      * @return return path to users database
      */
     private String getDatabasePath(){
-    	return new File("").getAbsolutePath()+"src\\by\\bsuir\\Kaminsky\\server\\database\\UsersDatabase.xml";
+    	return new File("").getAbsolutePath()+"\\src\\by\\bsuir\\Kaminsky\\server\\database\\UsersDatabase.xml";
 	}    
 }
 

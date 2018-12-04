@@ -43,7 +43,7 @@ public class UserLogic {
 	}
 	
 	/** Log in */
-	public static ArrayList<Object> logIn(Object[] answer,int action){	
+	private static ArrayList<Object> logIn(Object[] answer,int action){	
 		ArrayList<Object> message = new ArrayList<Object>();
 		User newUser;
 		String name;
@@ -77,11 +77,13 @@ public class UserLogic {
 	}
 	
 	/** Choose action */
-	private static void chooseAction() {
+	public static void chooseAction(ObjectInputStream inpStream,ObjectOutputStream outStream) {
 		
 		ArrayList<Object> message,result=null;
 		int action;
 		
+		in = inpStream;
+		out = outStream;
 		while (true) {
 			message = receiveMessage();
 			action = (int)message.get(0);
