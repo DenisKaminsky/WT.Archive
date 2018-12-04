@@ -78,10 +78,10 @@ public class ClientLogic {
 					getBooks(action);
 					break;
 				case 3:		
-					//BookLogic.findBooksByTitle();
+					findBooksByStringParameter("title",action);
 					break;
 				case 4:	
-					//BookLogic.findBooksByAuthor();
+					findBooksByStringParameter("author",action);
 					break;
 				case 5:	
 					getBooks(action);
@@ -131,6 +131,22 @@ public class ClientLogic {
 		sendMessage((Object)message);
 		result = receiveMessage();
 		Controller.printListRequest((ArrayList<Object>)result.get(2));		
+	}
+	
+	/** Get books by string parameter */
+	@SuppressWarnings("unchecked")
+	private static void findBooksByStringParameter(String parameterName,int action) {
+		ArrayList<Object> result,message = new ArrayList<Object>();
+		String parameter = Controller.getParameterRequest(parameterName);
+		 
+		if (parameter != null) {	
+			message.add(action);
+			message.add(parameter);
+			sendMessage((Object)message);
+			result = receiveMessage();				
+			Controller.printListRequest((ArrayList<Object>)result.get(2));	
+		}else
+			Controller.notifyUserRequest("ERROR");
 	}
 	
 	/** Show all users */
