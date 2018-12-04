@@ -6,7 +6,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import by.bsuir.Kaminsky.client.controller.Controller;
 import by.bsuir.Kaminsky.models.User;
-import by.bsuir.Kaminsky.server.DataAccessLayer.DaoFactory;
 
 public class ClientLogic {
 	
@@ -103,7 +102,7 @@ public class ClientLogic {
 					showUsers(action);
 					break;
 				case 11:		
-					//deleteUser();
+					deleteUser(action);
 					break;
 			}
 		}		
@@ -136,14 +135,15 @@ public class ClientLogic {
 	
 	/** Delete user */
 	private static void deleteUser(int action) {
+		ArrayList<Object> result,message = new ArrayList<Object>();
 		String login = Controller.getParameterRequest("Login of user, you want to delete");
 		
 		if (login != null) {
-			if (!DaoFactory.getUserDao().delete(answer)) {
-				Controller.notifyUserRequest("User not found or administrator");
-			}else {
-				Controller.notifyUserRequest("User "+answer+" was deleted");
-			}
+			message.add(action);
+			message.add(login);
+			sendMessage((Object)message);
+			result = receiveMessage();
+			Controller.notifyUserRequest((String)result.get(2));
 		}else {
 			Controller.notifyUserRequest("ERROR!");
 		}

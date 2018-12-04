@@ -5,7 +5,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import by.bsuir.Kaminsky.server.DataAccessLayer.DaoFactory;
-import by.bsuir.Kaminsky.client.controller.Controller;
 import by.bsuir.Kaminsky.models.User;
 
 /**
@@ -122,7 +121,7 @@ public class UserLogic {
 					result = getUsers(action);
 					break;
 				case 11:		
-					//deleteUser();
+					result = deleteUser((String)message.get(1),action);
 					break;				
 			}
 			sendMessage((Object)result);			
@@ -153,16 +152,20 @@ public class UserLogic {
 	}
 	
 	/** Delete user */
-	private static void deleteUser() {
-		String answer = Controller.getParameterRequest("login of user, you want to delete");
+	private static ArrayList<Object> deleteUser(String login,int action) {		
+		ArrayList<Object> message = new ArrayList<Object>();
 		
-		if (answer != null) {
-			if (!DaoFactory.getUserDao().delete(answer)) {
-				Controller.notifyUserRequest("User not found or administrator");
-			}else {
-				Controller.notifyUserRequest("User "+answer+" was deleted");
-			}
-		}		
+		message.add(action);
+		if (!DaoFactory.getUserDao().delete(login)) {
+			message.add(false);
+			message.add("User not found or administrator");
+			System.out.println("<warning> User not found or administrator!");
+		}else {
+			message.add(true);
+			message.add("User "+login+" was deleted");
+			System.out.println("<action> User "+login+" was deleted");
+		}	
+		return message;
 	}
 }
 
