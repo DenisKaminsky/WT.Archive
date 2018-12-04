@@ -22,7 +22,7 @@ public class ArchiveView {
 	 * @return list of data, input by user
 	 */
 	public static Object[] getPersonalData(){
-		boolean answer;
+		Boolean answer;
 		String login,password,attribute="";
 		
 		System.out.print("\nDo you have an account(Y/N): ");

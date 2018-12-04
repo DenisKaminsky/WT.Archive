@@ -1,5 +1,7 @@
 package by.bsuir.Kaminsky.server.DataAccessLayer.BookDao;
 
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
 import java.io.*;
 import java.util.ArrayList;
 import by.bsuir.Kaminsky.models.Book;
@@ -25,9 +27,9 @@ public class BookDao implements IBookDao{
 	 * @param book - Book entity
 	 * @return true if book was successfully deleted from books database,else return false
 	 */
-	public boolean delete(Book book) {
+	public Boolean delete(Book book) {
 		int counter = 0;
-		boolean flag = false;
+		Boolean flag = false;
 		ArrayList<Book> books = getBooks();
 		
 		for (Book currentBook : books) {
@@ -54,8 +56,8 @@ public class BookDao implements IBookDao{
 	 * @param book - Book entity
 	 * @return true if book was successfully added to books database,else return false
 	 */
-	public boolean save(Book book) {
-		boolean flag = false;
+	public Boolean save(Book book) {
+		Boolean flag = false;
 		File f = new File(fileName);	
 		Book searchBook = null;
 		ArrayList<Book> books = getBooks();		
@@ -94,9 +96,9 @@ public class BookDao implements IBookDao{
 	 * @param bookNew - New book entity
 	 * @return true if book was successfully replace by new book,else return false
 	 */
-	public boolean replace(Book bookOld,Book bookNew) {
+	public Boolean replace(Book bookOld,Book bookNew) {
 		int counter = 0;
-		boolean flag = false;
+		Boolean flag = false;
 		ArrayList<Book> books = getBooks();
 		
 		for (Book currentBook : books) {
@@ -208,10 +210,10 @@ public class BookDao implements IBookDao{
      */
 	private void SerializeBooks(ArrayList<Book> books,String fileName) throws IOException {
 		FileOutputStream fileStream = new FileOutputStream(fileName);
-	    ObjectOutputStream objectStream = new ObjectOutputStream(fileStream);
+	    XMLEncoder encoder = new XMLEncoder(fileStream);
 	    
-	    objectStream.writeObject(books);
-	    objectStream.close();
+	    encoder.writeObject(books);
+	    encoder.close();
 	    fileStream.close();
 	}
 	
@@ -224,17 +226,10 @@ public class BookDao implements IBookDao{
 	private ArrayList<Book> DeserializeBooks(String fileName) throws IOException, ClassNotFoundException{
 		ArrayList<Book> result;
 		FileInputStream fileStream = new FileInputStream(fileName);
-		ObjectInputStream objectStream;
+	    XMLDecoder decoder = new XMLDecoder(fileStream);
 		
-		try {
-			objectStream = new ObjectInputStream(fileStream);	    
-	    
-			result = (ArrayList<Book>)objectStream.readObject();
-			objectStream.close();
-		}
-		catch (EOFException e) {
-			result = new ArrayList<Book>(); 
-		}
+		result = (ArrayList<Book>)decoder.readObject();
+		decoder.close();
 	    fileStream.close();
 	    return result;
 	}
@@ -244,7 +239,7 @@ public class BookDao implements IBookDao{
      * @return path to books database
      */
 	private String getDatabasePath(){
-		return new File("").getAbsolutePath()+"src\\by\\bsuir\\Kaminsky\\server\\database\\BooksDatabase.xml";
+		return new File("").getAbsolutePath()+"\\src\\by\\bsuir\\Kaminsky\\server\\database\\BooksDatabase.xml";
 	}	
 }
 

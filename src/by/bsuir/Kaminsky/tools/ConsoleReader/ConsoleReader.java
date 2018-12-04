@@ -6,14 +6,14 @@ public class ConsoleReader {
 	
 	private static Scanner in = new Scanner(System.in);
 	
-	public static boolean getBoolean()	{
+	public static Boolean getBoolean()	{
 		while (!in.hasNextBoolean())  {
 			in.next();
 		}
 		return in.nextBoolean();
 	}
 	
-	public static boolean getAnswer() {
+	public static Boolean getAnswer() {
 		char answer;
 		do {
 			answer = in.nextLine().toLowerCase().charAt(0);

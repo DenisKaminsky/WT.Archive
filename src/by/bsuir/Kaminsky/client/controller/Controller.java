@@ -94,7 +94,7 @@ public class Controller {
 	 * @param isAdmin - Define type of user
 	 * @return user selection
 	 */
-	public static int chooseActionRequest(boolean isAdmin){
+	public static int chooseActionRequest(Boolean isAdmin){
 		int result  = -1;
 		String action = ArchiveView.getAction().toLowerCase().trim();
 		
@@ -178,7 +178,7 @@ public class Controller {
 	 * @param  email - Email address
 	 * @return true if address is correct, else return false
 	 */
-	private static boolean isValidEmailAddress(String email) {
+	private static Boolean isValidEmailAddress(String email) {
 		Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(email);
 		
@@ -190,7 +190,7 @@ public class Controller {
 	 * @param  password - Password
 	 * @return true if password is correct, else return false
 	 */
-	private static boolean isValidPassword(String password) {
+	private static Boolean isValidPassword(String password) {
 		if (password.length() < 5)
 			return false;
 		else {

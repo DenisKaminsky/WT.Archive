@@ -1,5 +1,7 @@
 package by.bsuir.Kaminsky.server.DataAccessLayer.UserDao;
 
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
 import java.io.*;
 import java.util.ArrayList;
 import by.bsuir.Kaminsky.models.User;
@@ -24,9 +26,9 @@ public class UserDao implements IUserDao {
 	 * @param login - Users email
 	 * @return return true if user was successfully deleted from users database, else return false
 	 */
-	public boolean delete(String login){
+	public Boolean delete(String login){
 		int counter = 0;
-		boolean flag = false;
+		Boolean flag = false;
 		ArrayList<User> users = getUsers();
 		
 		for (User currentUser : users) {
@@ -53,8 +55,8 @@ public class UserDao implements IUserDao {
 	 * @param user - User entity
 	 * @return return true if user was successfully added to users database, else return false
 	 */
-    public boolean save(User user) {
-    	boolean flag = false;
+    public Boolean save(User user) {
+    	Boolean flag = false;
 		File f = new File(fileName);	
 		User searchUser = null;
 		ArrayList<User> users = getUsers();		
@@ -133,12 +135,15 @@ public class UserDao implements IUserDao {
      * @param fileName - path to users database
      */
     private void SerializeUsers(ArrayList<User> users,String fileName) throws IOException {
-		FileOutputStream fileStream = new FileOutputStream(fileName);
-	    ObjectOutputStream objectStream = new ObjectOutputStream(fileStream);
+		FileOutputStream fileStream = new FileOutputStream(fileName);	    
+	    XMLEncoder encoder = new XMLEncoder(fileStream);
 	    
-	    objectStream.writeObject(users);
-	    objectStream.close();
+	    encoder.writeObject(users);
+	    encoder.close();
 	    fileStream.close();
+	    //ObjectOutputStream objectStream = new ObjectOutputStream(fileStream);
+	    //objectStream.writeObject(users);
+	    //objectStream.close();
 	}	
 	
     /**
@@ -149,18 +154,11 @@ public class UserDao implements IUserDao {
 	@SuppressWarnings("unchecked")
 	private ArrayList<User> DeserializeUsers(String fileName) throws IOException, ClassNotFoundException{
 		ArrayList<User> result;
-		FileInputStream fileStream = new FileInputStream(fileName);
-		ObjectInputStream objectStream;
+		FileInputStream fileStream = new FileInputStream(fileName);   
+		XMLDecoder decoder = new XMLDecoder(fileStream);
 		
-		try {
-			objectStream = new ObjectInputStream(fileStream);	    
-	    
-			result = (ArrayList<User>)objectStream.readObject();
-			objectStream.close();
-		}
-		catch (EOFException e) {
-			result = new ArrayList<User>(); 
-		}
+		result = (ArrayList<User>)decoder.readObject();
+		decoder.close();
 	    fileStream.close();
 	    return result;
 	}

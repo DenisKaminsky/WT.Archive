@@ -49,7 +49,7 @@ public class UserLogic {
 		String name;
 				
 		message.add(action);
-		if ( !(boolean)answer[0] ){			
+		if ( !(Boolean)answer[0] ){			
 			newUser = new User((String)answer[1], MD5.getHash((String)answer[2]), false);
 			if ( ! DaoFactory.getUserDao().save(newUser) ){	
 				message.add(false);

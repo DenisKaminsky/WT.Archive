@@ -5,8 +5,8 @@ import by.bsuir.Kaminsky.models.Book;
 
 public interface IBookDao {
 	
-	boolean delete(Book book);
-    boolean save(Book book);
+	Boolean delete(Book book);
+    Boolean save(Book book);
     ArrayList<Book> getBooks();
     ArrayList<Book> getBooksByTitle(String title);
     ArrayList<Book> getBooksByAuthor(String author);

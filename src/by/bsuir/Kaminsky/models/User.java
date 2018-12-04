@@ -18,20 +18,25 @@ public class User implements Serializable {
 	/** User's password */
 	private String password;
 	
-	/** User type */
-	private boolean isAdministrator;
+	/** User's type */
+	private Boolean isAdministrator;
+	
+	/** Default constructor **/
+	public User(){	
+		
+	}
 	
 	/** Constructor set users's login,password and type 
 	 * @param login - User login
 	 * @param password - User password
 	 * @param isAdministrator - User type
 	 * */
-	public User(String login,String password,boolean isAdministrator){
+	public User(String login,String password,Boolean isAdministrator){
 		this.login = login;
 		this.password = password;
 		this.isAdministrator = isAdministrator;
 	}
-	
+
 	/**
 	 * Get user's login
 	 * @return return user's login
@@ -68,7 +73,7 @@ public class User implements Serializable {
 	 * Get user type
 	 * @return return user's login
 	 */
-	public boolean getIsAdministrator(){
+	public Boolean getIsAdministrator(){
 		return isAdministrator;
 	}
 	

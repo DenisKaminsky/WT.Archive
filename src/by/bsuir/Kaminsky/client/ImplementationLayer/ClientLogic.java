@@ -48,11 +48,11 @@ public class ClientLogic {
 			message.add(answer);
 			sendMessage((Object)message);
 			result = receiveMessage();
-			if ((boolean)result.get(1) && !(boolean)answer[0]) {
+			if ((Boolean)result.get(1) && !(Boolean)answer[0]) {
 				user = (User)result.get(2);
 				Controller.notifyUserRequest("User "+user.getLogin()+" was successfully register");
 				chooseAction();
-			}else if ((boolean)result.get(1) && (boolean)answer[0]) {
+			}else if ((Boolean)result.get(1) && (Boolean)answer[0]) {
 				user = (User)result.get(2);
 				String name = (user.getIsAdministrator())?"Administrator ":"User ";
 				Controller.notifyUserRequest(name+user.getLogin()+" log in");
@@ -66,7 +66,7 @@ public class ClientLogic {
 	
 	/** Choose action */
 	private static void chooseAction() throws IOException{
-		boolean flag = true;
+		Boolean flag = true;
 		
 		while (flag) {
 			int action = Controller.chooseActionRequest(user.getIsAdministrator());

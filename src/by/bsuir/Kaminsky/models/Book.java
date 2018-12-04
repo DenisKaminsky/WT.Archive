@@ -20,14 +20,18 @@ public class Book implements Serializable{
 	private String title;
 	
 	/** Type of book */
-	private boolean isElectronic;
+	private Boolean isElectronic;
 	
+	/** Default constructor */
+	public Book() {
+		
+	}
 	/** Constructor set book's author,title and type 
 	 * @param author - Book author
 	 * @param title - Book title
 	 * @param isElectronic - Book Type
 	 * */
-	public Book(String author,String title,boolean isElectronic){
+	public Book(String author,String title,Boolean isElectronic){
 		this.author = author;
 		this.title = title;
 		this.isElectronic = isElectronic;
@@ -69,7 +73,7 @@ public class Book implements Serializable{
 	 * Get book's type
 	 * @return return book's type
 	 */
-	public boolean getIsElectronic(){
+	public Boolean getIsElectronic(){
 		return isElectronic;
 	}
 		
