@@ -32,24 +32,36 @@ public class BookLogic {
     }
 	
 	/** Get paper books*/
-	public static void findPaperBooks(){
+	public static ArrayList<Object> findPaperBooks(int action){
+		ArrayList<Object> message = new ArrayList<Object>();
 		ArrayList<Object> books = new ArrayList<Object>(DaoFactory.getBookDao().getPaperBooks());
 		
-		//Controller.printListRequest(books);	
+		message.add(action);
+		message.add(true);
+		message.add(books);
+		return message;	
     }
 	
 	/** Get electronic books */
-	public static void findElectonicBooks(){
+	public static ArrayList<Object> findElectonicBooks(int action){
+		ArrayList<Object> message = new ArrayList<Object>();
 		ArrayList<Object> books = new ArrayList<Object>(DaoFactory.getBookDao().getElectonicBooks());
 		
-		//Controller.printListRequest(books);	
+		message.add(action);
+		message.add(true);
+		message.add(books);
+		return message;
     }
 	
 	/** Get all books */
-	public static void getBooks(){	
+	public static ArrayList<Object> getBooks(int action){
+		ArrayList<Object> message = new ArrayList<Object>();
 		ArrayList<Object> books = new ArrayList<Object>(DaoFactory.getBookDao().getBooks());
 		
-		//Controller.printListRequest(books);		
+		message.add(action);
+		message.add(true);
+		message.add(books);
+		return message;
 	}
 	
 	/** Add book */

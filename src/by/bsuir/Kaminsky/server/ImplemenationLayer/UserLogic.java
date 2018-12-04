@@ -94,7 +94,7 @@ public class UserLogic {
 					result = logOut((String)message.get(1),action);
 					break;
 				case 2:	
-					//BookLogic.getBooks();
+					result = BookLogic.getBooks(action);
 					break;
 				case 3:		
 					//BookLogic.findBooksByTitle();
@@ -103,10 +103,10 @@ public class UserLogic {
 					//BookLogic.findBooksByAuthor();
 					break;
 				case 5:	
-					//BookLogic.findElectonicBooks();
+					result = BookLogic.findElectonicBooks(action);
 					break;
 				case 6:
-					//BookLogic.findPaperBooks();
+					result = BookLogic.findPaperBooks(action);
 					break;
 				case 7:	
 					//BookLogic.modifyBook();

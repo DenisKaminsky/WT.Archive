@@ -75,7 +75,7 @@ public class ClientLogic {
 					logOut(action);
 					break;
 				case 2:	
-					//BookLogic.getBooks();
+					getBooks(action);
 					break;
 				case 3:		
 					//BookLogic.findBooksByTitle();
@@ -84,10 +84,10 @@ public class ClientLogic {
 					//BookLogic.findBooksByAuthor();
 					break;
 				case 5:	
-					//BookLogic.findElectonicBooks();
+					getBooks(action);
 					break;
 				case 6:
-					//BookLogic.findPaperBooks();
+					getBooks(action);
 					break;
 				case 7:	
 					//BookLogic.modifyBook();
@@ -120,6 +120,17 @@ public class ClientLogic {
 		sendMessage((Object)message);
 		receiveMessage();
 		user = null;
+	}
+	
+	/** Get books */
+	@SuppressWarnings("unchecked")
+	private static void getBooks(int action){			
+		ArrayList<Object> result,message = new ArrayList<Object>();
+		
+		message.add(action);
+		sendMessage((Object)message);
+		result = receiveMessage();
+		Controller.printListRequest((ArrayList<Object>)result.get(2));		
 	}
 	
 	/** Show all users */
