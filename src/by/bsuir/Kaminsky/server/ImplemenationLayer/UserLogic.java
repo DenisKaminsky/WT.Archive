@@ -109,7 +109,7 @@ public class UserLogic {
 					result = BookLogic.findPaperBooks(action);
 					break;
 				case 7:	
-					//BookLogic.modifyBook();
+					result = BookLogic.modifyBook((Object[])message.get(1),action);
 					break;
 				case 8:		
 					result = BookLogic.addBook((Object[])message.get(1),action);

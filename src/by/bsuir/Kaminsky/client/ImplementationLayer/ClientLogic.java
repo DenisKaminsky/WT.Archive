@@ -90,13 +90,13 @@ public class ClientLogic {
 					getBooks(action);
 					break;
 				case 7:	
-					addOrRemove(action);
+					modifyBook(action);
 					break;
 				case 8:		
 					addOrRemove(action);
 					break;
 				case 9:		
-					//BookLogic.deleteBook();
+					addOrRemove(action);
 					break;
 				case 10:		
 					showUsers(action);
@@ -153,6 +153,21 @@ public class ClientLogic {
 	private static void addOrRemove(int action) {
 		ArrayList<Object> result,message = new ArrayList<Object>();
 		Object[] data = Controller.getBookRequest();
+		 
+		if (data != null) {	
+			message.add(action);
+			message.add(data);
+			sendMessage((Object)message);
+			result = receiveMessage();				
+			Controller.notifyUserRequest((String)result.get(2));	
+		}else
+			Controller.notifyUserRequest("ERROR");
+	}
+	
+	/** Modify book */
+	private static void modifyBook(int action) {
+		ArrayList<Object> result,message = new ArrayList<Object>();
+		Object[] data = Controller.replaceBookRequest();
 		 
 		if (data != null) {	
 			message.add(action);

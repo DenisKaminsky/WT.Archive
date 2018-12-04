@@ -107,18 +107,24 @@ public class BookLogic {
 	}
 	
 	/** Modify book */
-	public static void modifyBook() {
+	public static ArrayList<Object> modifyBook(Object[] data,int action) {
 		Book bookOld,bookNew;
-		Object[] answer = Controller.replaceBookRequest();
+		ArrayList<Object> message = new ArrayList<Object>();
 		
-		if (answer != null) {
-			bookOld = new Book((String)answer[0],(String)answer[1],(Boolean)answer[2]);
-			bookNew = new Book((String)answer[3],(String)answer[4],(Boolean)answer[5]);
-			if (!DaoFactory.getBookDao().replace(bookOld, bookNew))
-				Controller.notifyUserRequest("Book not found");
-			else
-				Controller.notifyUserRequest("Book was modified");
+		message.add(action);
+		bookOld = new Book((String)data[0],(String)data[1],(Boolean)data[2]);
+		bookNew = new Book((String)data[3],(String)data[4],(Boolean)data[5]);
+		if (!DaoFactory.getBookDao().replace(bookOld, bookNew)) {
+			message.add(false);
+			message.add("Book not found");
+			System.out.println("<warning> Book not found!");
 		}
+		else {
+			message.add(true);
+			message.add("Book was modified");
+			System.out.println("<action> Book was modified");
+		}
+		return message;
 	}
 	
 }
