@@ -97,10 +97,10 @@ public class UserLogic {
 					result = BookLogic.getBooks(action);
 					break;
 				case 3:		
-					//BookLogic.findBooksByTitle();
+					result = BookLogic.findBooksByTitle((String)message.get(1),action);
 					break;
 				case 4:	
-					//BookLogic.findBooksByAuthor();
+					result = BookLogic.findBooksByAuthor((String)message.get(1),action);
 					break;
 				case 5:	
 					result = BookLogic.findElectonicBooks(action);

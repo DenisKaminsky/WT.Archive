@@ -12,23 +12,25 @@ import by.bsuir.Kaminsky.models.Book;
 public class BookLogic {
 		
 	/** Get books by author */
-	public static void findBooksByAuthor(String author){
-		 ArrayList<Object> books;
-		 
-		 if (author != null) {			 
-			 books = new ArrayList<Object>(DaoFactory.getBookDao().getBooksByAuthor(author));				
-			 //Controller.printListRequest(books);	
-		 }			 
+	public static ArrayList<Object> findBooksByAuthor(String author,int action){
+		ArrayList<Object> message = new ArrayList<Object>();
+		ArrayList<Object> books = new ArrayList<Object>(DaoFactory.getBookDao().getBooksByAuthor(author));	
+		 		 		
+		message.add(action);
+		message.add(true);
+		message.add(books);		
+		return message;	
     }
 	
 	/** Get books by title */
-	public static void findBooksByTitle(String title){
-		 ArrayList<Object> books;
-		 
-		 if (title != null) {			 
-			 books = new ArrayList<Object>(DaoFactory.getBookDao().getBooksByTitle(title));				
-			 //Controller.printListRequest(books);	
-		 }			 
+	public static ArrayList<Object> findBooksByTitle(String title,int action){
+		ArrayList<Object> message = new ArrayList<Object>();
+		ArrayList<Object> books = new ArrayList<Object>(DaoFactory.getBookDao().getBooksByTitle(title));	
+		 			 
+		message.add(action);
+		message.add(true);
+		message.add(books);		
+		return message;		 			 
     }
 	
 	/** Get paper books*/
