@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import by.bsuir.Kaminsky.server.DataAccessLayer.DaoFactory;
+import by.bsuir.Kaminsky.client.controller.Controller;
 import by.bsuir.Kaminsky.models.User;
 
 /**
@@ -87,12 +88,11 @@ public class UserLogic {
 			action = (int)message.get(0);
 			
 			switch (action) {
-					break;
 				case 0:	
-					result= logIn((Object[])message.get(1),action);
+					result = logIn((Object[])message.get(1),action);
 					break;
 				case 1:	
-					//logOut();
+					result = logOut((String)message.get(1),action);
 					break;
 				case 2:	
 					//BookLogic.getBooks();
@@ -130,11 +130,14 @@ public class UserLogic {
 	}
 	
 	/** Log out */
-	private static void logOut(){	
-		String name = (user.getIsAdministrator())?"Administrator ":"User ";
+	private static ArrayList<Object> logOut(String message,int action){
+		ArrayList<Object> result;
 		
-		Controller.notifyUserRequest(name+user.getLogin()+" log out");
-		user = null;
+		System.out.println(message);
+		result = new ArrayList<Object>();
+		result.add(action);
+		result.add("true");
+		return result;
 	}
 	
 	/** Show all users */

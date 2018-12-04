@@ -66,52 +66,59 @@ public class ClientLogic {
 		while (flag) {
 			int action = Controller.chooseActionRequest(user.getIsAdministrator());
 			switch (action) {
-				case 0:			
+				case 0:		
+					logOut(action+1);
 					System.exit(0);
 					break;
 				case 1:	
 					flag = false;
-					logOut();
+					logOut(action);
 					break;
 				case 2:	
-					BookLogic.getBooks();
+					//BookLogic.getBooks();
 					break;
 				case 3:		
-					BookLogic.findBooksByTitle();
+					//BookLogic.findBooksByTitle();
 					break;
 				case 4:	
-					BookLogic.findBooksByAuthor();
+					//BookLogic.findBooksByAuthor();
 					break;
 				case 5:	
-					BookLogic.findElectonicBooks();
+					//BookLogic.findElectonicBooks();
 					break;
 				case 6:
-					BookLogic.findPaperBooks();
+					//BookLogic.findPaperBooks();
 					break;
 				case 7:	
-					BookLogic.modifyBook();
+					//BookLogic.modifyBook();
 					break;
 				case 8:		
-					BookLogic.addBook();
+					//BookLogic.addBook();
 					break;
 				case 9:		
-					BookLogic.deleteBook();
+					//BookLogic.deleteBook();
 					break;
 				case 10:		
-					showUsers();
+					//showUsers();
 					break;
 				case 11:		
-					deleteUser();
+					//deleteUser();
 					break;
 			}
 		}		
 	}
 	
 	/** Log out */
-	private static void logOut(){	
+	private static void logOut(int action){
+		ArrayList<Object> message;
 		String name = (user.getIsAdministrator())?"Administrator ":"User ";
 		
 		Controller.notifyUserRequest(name+user.getLogin()+" log out");
+		message = new ArrayList<Object>();
+		message.add(action);
+		message.add(name+user.getLogin()+" log out");
+		sendMessage((Object)message);
+		receiveMessage();
 		user = null;
 	}	
 }
