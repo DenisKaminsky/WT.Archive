@@ -13,15 +13,12 @@ public class ClientLogic {
 	private static ObjectOutputStream out;
 	private static ObjectInputStream in;
 	
-	/** Send message */
-	public static void sendMessage(Object message) {
-        try {
-        	out.reset();
-            out.writeObject(message);
-            out.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	/** Send message 
+	 * @throws IOException */
+	public static void sendMessage(Object message) throws IOException {
+        out.reset();
+        out.writeObject(message);
+        out.flush();
 	}
 	
 	/** Receive message */
@@ -38,13 +35,14 @@ public class ClientLogic {
 		return result;
 	}
 	
-	public static void logIn(ObjectInputStream inpStream,ObjectOutputStream outStream){	
+	public static void logIn(ObjectInputStream inpStream,ObjectOutputStream outStream) throws IOException{	
 		Object[] answer = Controller.authorizeRequest();
 		ArrayList<Object> message,result;
 		
 		in = inpStream;
 		out = outStream;		
 		if (answer != null){
+			
 			message = new ArrayList<Object>();
 			message.add(0);
 			message.add(answer);
@@ -61,12 +59,13 @@ public class ClientLogic {
 				chooseAction();
 			}
 			else
-				Controller.notifyUserRequest((String)result.get(2));				
+				Controller.notifyUserRequest((String)result.get(2));
+			
 		}
 	}
 	
 	/** Choose action */
-	private static void chooseAction() {
+	private static void chooseAction() throws IOException{
 		boolean flag = true;
 		
 		while (flag) {
@@ -115,7 +114,7 @@ public class ClientLogic {
 	}
 	
 	/** Log out */
-	private static void logOut(int action){
+	private static void logOut(int action) throws IOException{
 		ArrayList<Object> message;
 		String name = (user.getIsAdministrator())?"Administrator ":"User ";
 		
@@ -130,7 +129,7 @@ public class ClientLogic {
 	
 	/** Get books */
 	@SuppressWarnings("unchecked")
-	private static void getBooks(int action){			
+	private static void getBooks(int action) throws IOException{			
 		ArrayList<Object> result,message = new ArrayList<Object>();
 		
 		message.add(action);
@@ -141,7 +140,7 @@ public class ClientLogic {
 	
 	/** Get books by string parameter */
 	@SuppressWarnings("unchecked")
-	private static void findBooksByStringParameter(String parameterName,int action) {
+	private static void findBooksByStringParameter(String parameterName,int action) throws IOException{
 		ArrayList<Object> result,message = new ArrayList<Object>();
 		String parameter = Controller.getParameterRequest(parameterName);
 		 
@@ -156,7 +155,7 @@ public class ClientLogic {
 	}
 	
 	/** Add or remove book */
-	private static void addOrRemove(int action) {
+	private static void addOrRemove(int action) throws IOException{
 		ArrayList<Object> result,message = new ArrayList<Object>();
 		Object[] data = Controller.getBookRequest();
 		 
@@ -171,7 +170,7 @@ public class ClientLogic {
 	}
 	
 	/** Modify book */
-	private static void modifyBook(int action) {
+	private static void modifyBook(int action) throws IOException{
 		ArrayList<Object> result,message = new ArrayList<Object>();
 		Object[] data = Controller.replaceBookRequest();
 		 
@@ -187,7 +186,7 @@ public class ClientLogic {
 	
 	/** Show all users */
 	@SuppressWarnings("unchecked")
-	private static void showUsers(int action) {
+	private static void showUsers(int action) throws IOException{
 		ArrayList<Object> result,message = new ArrayList<Object>();
 		
 		message.add(action);
@@ -197,7 +196,7 @@ public class ClientLogic {
 	}
 	
 	/** Delete user */
-	private static void deleteUser(int action) {
+	private static void deleteUser(int action) throws IOException{
 		ArrayList<Object> result,message = new ArrayList<Object>();
 		String login = Controller.getParameterRequest("Login of user, you want to delete");
 		

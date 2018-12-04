@@ -30,6 +30,5 @@ public class Main {
         }finally {
             System.out.println("<end> Close socket");
         }
-
     }
 }

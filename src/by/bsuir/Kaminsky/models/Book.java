@@ -7,6 +7,7 @@ import java.io.Serializable;
  * @author DenisKaminsky
  * @version 1.1
  */
+
 public class Book implements Serializable{
 	
 	/** The unique version ID of the serialized class */
