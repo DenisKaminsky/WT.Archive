@@ -119,7 +119,7 @@ public class UserLogic {
 					//BookLogic.deleteBook();
 					break;
 				case 10:		
-					//showUsers();
+					result = getUsers(action);
 					break;
 				case 11:		
 					//deleteUser();
@@ -133,7 +133,7 @@ public class UserLogic {
 	private static ArrayList<Object> logOut(String message,int action){
 		ArrayList<Object> result;
 		
-		System.out.println(message);
+		System.out.println("<action> "+message);
 		result = new ArrayList<Object>();
 		result.add(action);
 		result.add("true");
@@ -141,10 +141,15 @@ public class UserLogic {
 	}
 	
 	/** Show all users */
-	private static void showUsers() {
+	private static ArrayList<Object> getUsers(int action) {
+		ArrayList<Object> message = new ArrayList<Object>();
 		ArrayList<Object> users = new ArrayList<Object>(DaoFactory.getUserDao().getUsers());
 		
-		Controller.printListRequest(users);	
+		System.out.println("<action> Get all users");
+		message.add(action);
+		message.add(true);
+		message.add(users);
+		return message;
 	}
 	
 	/** Delete user */
