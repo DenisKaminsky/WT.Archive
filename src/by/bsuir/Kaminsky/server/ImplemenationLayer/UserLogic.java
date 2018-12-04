@@ -37,8 +37,8 @@ public class UserLogic {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			//reset connection
+		} 
 		return result;
 	}
 	
@@ -86,6 +86,8 @@ public class UserLogic {
 		out = outStream;
 		while (true) {
 			message = receiveMessage();
+			if (message == null)
+				break;
 			action = (int)message.get(0);
 			
 			switch (action) {

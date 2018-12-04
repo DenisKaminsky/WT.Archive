@@ -13,12 +13,15 @@ public class Main {
             	//is blocked until a new connection is established
                 Socket socket = s.accept();
                 try {
-                	System.out.println("Connect with "+socket.getLocalPort()+socket.getInetAddress());
+                	System.out.println("<connect> Connect with "+socket.getLocalPort()+socket.getInetAddress());
                     new ServerMultiThread(socket);
                 }catch (IOException e) {
                     socket.close();
                 }
             }
         }
+        catch (BindException e) {
+			System.out.println("<error> Only one server can be started on single host!");
+		}
     }
 }

@@ -20,9 +20,14 @@ public class ServerMultiThread extends Thread {
         start(); // call run()
     }
 
-    public void run() {        
+    public void run(){        
     	UserLogic.chooseAction(in,out);
-        System.out.println("<close> Server closing");  
+    	System.out.println("<disconnect> Close connection with "+socket.getLocalPort()+socket.getInetAddress());
+    	try {
+			socket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
 }
