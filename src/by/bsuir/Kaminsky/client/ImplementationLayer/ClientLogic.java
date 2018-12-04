@@ -90,10 +90,10 @@ public class ClientLogic {
 					getBooks(action);
 					break;
 				case 7:	
-					//BookLogic.modifyBook();
+					addOrRemove(action);
 					break;
 				case 8:		
-					//BookLogic.addBook();
+					addOrRemove(action);
 					break;
 				case 9:		
 					//BookLogic.deleteBook();
@@ -145,6 +145,21 @@ public class ClientLogic {
 			sendMessage((Object)message);
 			result = receiveMessage();				
 			Controller.printListRequest((ArrayList<Object>)result.get(2));	
+		}else
+			Controller.notifyUserRequest("ERROR");
+	}
+	
+	/** Add or remove book */
+	private static void addOrRemove(int action) {
+		ArrayList<Object> result,message = new ArrayList<Object>();
+		Object[] data = Controller.getBookRequest();
+		 
+		if (data != null) {	
+			message.add(action);
+			message.add(data);
+			sendMessage((Object)message);
+			result = receiveMessage();				
+			Controller.notifyUserRequest((String)result.get(2));	
 		}else
 			Controller.notifyUserRequest("ERROR");
 	}

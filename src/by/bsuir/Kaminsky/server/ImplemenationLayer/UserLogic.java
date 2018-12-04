@@ -112,10 +112,10 @@ public class UserLogic {
 					//BookLogic.modifyBook();
 					break;
 				case 8:		
-					//BookLogic.addBook();
+					result = BookLogic.addBook((Object[])message.get(1),action);
 					break;
 				case 9:		
-					//BookLogic.deleteBook();
+					result = BookLogic.deleteBook((Object[])message.get(1),action);
 					break;
 				case 10:		
 					result = getUsers(action);

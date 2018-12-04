@@ -67,32 +67,43 @@ public class BookLogic {
 	}
 	
 	/** Add book */
-	public static void addBook() {
+	public static ArrayList<Object> addBook(Object[] data,int action) {
 		Book book;
-		Object[] answer = Controller.getBookRequest();
+		ArrayList<Object> message = new ArrayList<Object>();	
 		
-		if (answer != null) {
-			book = new Book((String)answer[0],(String)answer[1],(Boolean)answer[2]);
-			if (!DaoFactory.getBookDao().save(book))
-				Controller.notifyUserRequest("Book already exists");
-			else
-				Controller.notifyUserRequest("Book was added");
-		}			
-		
+		message.add(action);
+		book = new Book((String)data[0],(String)data[1],(Boolean)data[2]);
+		if (!DaoFactory.getBookDao().save(book)) {
+			message.add(false);
+			message.add("Book already exists");
+			System.out.println("<warning> Book already exists!");
+		}
+		else {	
+			message.add(true);
+			message.add("Book was added");
+			System.out.println("<action> Book was added");
+		}
+		return message;
 	}
 	
 	/** Delete book */
-	public static void deleteBook() {
+	public static ArrayList<Object> deleteBook(Object[] data,int action) {
 		Book book;
-		Object[] answer = Controller.getBookRequest();
+		ArrayList<Object> message = new ArrayList<Object>();	
 		
-		if (answer != null) {
-			book = new Book((String)answer[0],(String)answer[1],(Boolean)answer[2]);
-			if (!DaoFactory.getBookDao().delete(book))
-				Controller.notifyUserRequest("Book not found");
-			else
-				Controller.notifyUserRequest("Book was deleted");
-		}			
+		message.add(action);
+		book = new Book((String)data[0],(String)data[1],(Boolean)data[2]);
+		if (!DaoFactory.getBookDao().delete(book)) {
+			message.add(false);
+			message.add("Book not found");
+			System.out.println("<warning> Book not found!");
+		}
+		else {
+			message.add(true);
+			message.add("Book was deleted");
+			System.out.println("<action> Book was deleted");
+		}
+		return message;
 	}
 	
 	/** Modify book */
